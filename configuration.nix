@@ -125,6 +125,7 @@
     fzf
     tmux
     rustup
+    volumeicon
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
