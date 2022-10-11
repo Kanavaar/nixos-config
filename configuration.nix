@@ -13,6 +13,9 @@
   # Allow Unfree
   nixpkgs.config.allowUnfree = true;
 
+  # Enable zsh
+  # programs.zsh.enable = true; 
+
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -49,6 +52,8 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.xfce.enable = true;
+  services.xserver.windowManager.qtile.enable = true;
   
 
   # Configure keymap in X11
@@ -71,6 +76,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tilman = {
     isNormalUser = true;
+     shell = pkgs.bash;
     home = "/home/tilman";
     extraGroups = [ "wheel" "audio" "video" "networkmanager" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
@@ -86,6 +92,7 @@
     xorg.xsetroot
     wget
     neovim
+    helix
     emacs
     curl
     xfce.thunar
@@ -97,7 +104,11 @@
     git
     networkmanager
     siduck76-st
+    alacritty
+    qtile
+    rofi
     xfce.xfce4-screenshooter
+    xfce.xfwm4
     feh
     unzip
     zip
@@ -107,6 +118,12 @@
     mupdf
     zsh
     dash
+    lxappearance
+    vimPlugins.vim-plug
+    tela-icon-theme
+    qogir-theme
+    fzf
+    tmux
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
