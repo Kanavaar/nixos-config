@@ -50,8 +50,7 @@
 
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
   services.xserver.windowManager.qtile.enable = true;
   
@@ -126,6 +125,7 @@
     tmux
     rustup
     volumeicon
+    lightdm
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
