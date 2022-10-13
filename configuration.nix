@@ -121,6 +121,7 @@
     vimPlugins.vim-plug
     tela-icon-theme
     qogir-theme
+    qogir-icon-theme
     fzf
     tmux
     rustup
