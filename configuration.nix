@@ -153,6 +153,7 @@
 
     ## Programming languages
     rustup # Rust
+    go_1_19 # golang
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
