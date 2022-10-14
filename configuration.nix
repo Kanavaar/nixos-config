@@ -49,7 +49,7 @@
   services.xserver.enable = true;
 
 
-  # Enable the GNOME Desktop Environment.
+  # Enable DE/WM and lightdm
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
   services.xserver.windowManager.qtile.enable = true;
@@ -87,46 +87,72 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    xorg.xsetroot
-    wget
-    neovim
-    helix
-    emacs
-    curl
+    
+    # DE/WM
+    ## Login
+    lightdm
+    ## XFCE stuff
     xfce.thunar
     xfce.thunar-volman
-    mpv
-    htop
-    libreoffice
-    librewolf
-    git
-    networkmanager
-    siduck76-st
-    alacritty
-    qtile
-    rofi
     xfce.xfce4-screenshooter
     xfce.xfwm4
-    feh
-    unzip
-    zip
-    gimp
-    inkscape
-    file
-    mupdf
-    zsh
-    dash
+    ## WM's
+    qtile
+    ## Icons, themes and gtk setter 
     lxappearance
-    vimPlugins.vim-plug
     tela-icon-theme
     qogir-theme
     qogir-icon-theme
+    ## Applications Laucnher
+    rofi
+
+    # Text Editor
+    ## Terminal
+    vim
+    neovim
+    ## GUI
+    emacs
+   
+    # GUI Applications
+    ## Image stuff
+    gimp
+    feh
+    inkscape
+    ## Video Stuff
+    mpv
+    vlc
+    ## Browser
+    librewolf
+    ## Office
+    libreoffice
+    ## PDF
+    zathura
+
+    # CMD utils I need
+    wget
+    curl
+    git
+    zip
+    unzip
+    file
     fzf
     tmux
-    rustup
+    htop
+    ## Shells
+    zsh
+    dash
+
+    # Other utils
+    xorg.xsetroot
+    networkmanager
     volumeicon
-    lightdm
+
+    # terminal
+    siduck76-st
+    alacritty
+
+    ## Programming languages
+    rustup # Rust
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
