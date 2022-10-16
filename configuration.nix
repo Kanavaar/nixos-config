@@ -106,6 +106,7 @@
     tela-circle-icon-theme
     qogir-theme
     qogir-icon-theme
+    capitaine-cursors
     ## Applications Laucnher
     rofi
 
