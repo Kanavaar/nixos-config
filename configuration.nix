@@ -53,6 +53,7 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
   services.xserver.windowManager.qtile.enable = true;
+  services.xserver.windowManager.awesome.enable = true;
   
 
   # Configure keymap in X11
@@ -97,10 +98,12 @@
     xfce.xfce4-screenshooter
     xfce.xfwm4
     ## WM's
+    awesome
     qtile
     ## Icons, themes and gtk setter 
     lxappearance
     tela-icon-theme
+    tela-circle-icon-theme
     qogir-theme
     qogir-icon-theme
     ## Applications Laucnher
@@ -138,9 +141,11 @@
     fzf
     tmux
     htop
+    groff
     ## Shells
     zsh
     dash
+    
 
     # Other utils
     xorg.xsetroot
