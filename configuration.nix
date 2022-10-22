@@ -110,7 +110,9 @@
     ## Applications Laucnher
     rofi
     ## lockscreen
-    betterlockscreen
+    slock
+    ## Hotkey setter
+    sxhkd
     
     # Text Editor
     ## Terminal
@@ -126,7 +128,6 @@
     inkscape
     ## Video Stuff
     mpv
-    vlc
     ## Browser
     librewolf
     ## Office
@@ -155,9 +156,8 @@
     volumeicon
 
     # Terminal
-    siduck76-st
     alacritty
-    kitty
+    
 
     # Programming languages
     rustup # Rust
