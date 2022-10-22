@@ -109,7 +109,9 @@
     capitaine-cursors
     ## Applications Laucnher
     rofi
-
+    ## lockscreen
+    betterlockscreen
+    
     # Text Editor
     ## Terminal
     vim
@@ -147,17 +149,17 @@
     zsh
     dash
     
-
     # Other utils
     xorg.xsetroot
     networkmanager
     volumeicon
 
-    # terminal
+    # Terminal
     siduck76-st
     alacritty
+    kitty
 
-    ## Programming languages
+    # Programming languages
     rustup # Rust
     go_1_19 # golang
   ];
