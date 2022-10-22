@@ -110,9 +110,11 @@
     ## Applications Laucnher
     rofi
     ## lockscreen
-    slock
+    betterlockscreen
     ## Hotkey setter
     sxhkd
+    ## Notification
+    dunst
     
     # Text Editor
     ## Terminal
@@ -134,6 +136,8 @@
     libreoffice
     ## PDF
     zathura
+    ## chatting
+    discord-canary
 
     # CMD utils I need
     wget
@@ -163,6 +167,7 @@
     rustup # Rust
     go_1_19 # golang
   ];
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
