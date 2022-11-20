@@ -51,23 +51,25 @@
 
   # Enable DE/WM and lightdm
   services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
-  services.xserver.windowManager.qtile.enable = true;
   services.xserver.windowManager.awesome.enable = true;
   
 
   # Configure keymap in X11
-  services.xserver.layout = "de";
- #  services.xserver.xkbOptions = {
- #    "eurosign:e";
- #    "caps:escape" # map caps to escape.
- #  };
+  services.xserver = {
+	layout = "de";
+	xkbVariant = "nodeadkeys";
+	xkbOptions = "caps:escape";
+  };
+  # services.xserver.xkbOptions = {
+  #   "eurosign:e";
+  #   "caps:escape" # map caps to escape.
+  # };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
+  #sound.enable = true;
   hardware.pulseaudio.enable = true;
  
   # Enable touchpad support (enabled default in most desktopManager).
@@ -80,8 +82,6 @@
     home = "/home/tilman";
     extraGroups = [ "wheel" "audio" "video" "networkmanager" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      firefox
-      thunderbird
     ];
   };
 
@@ -95,15 +95,13 @@
     ## XFCE stuff
     xfce.thunar
     xfce.thunar-volman
-    xfce.xfce4-screenshooter
-    xfce.xfwm4
     ## WM's
     awesome
-    qtile
+    # bspwm
+    ## Bar
+    # polybar
     ## Icons, themes and gtk setter 
     lxappearance
-    tela-icon-theme
-    tela-circle-icon-theme
     qogir-theme
     qogir-icon-theme
     capitaine-cursors
@@ -115,25 +113,27 @@
     sxhkd
     ## Notification
     dunst
+    ## Screenshot
+    scrot
     
     # Text Editor
     ## Terminal
-    vim
+    # vim
     neovim
     ## GUI
-    emacs
+    # emacs
    
     # GUI Applications
     ## Image stuff
-    gimp
+    # gimp
     feh
-    inkscape
+    # inkscape
     ## Video Stuff
     mpv
     ## Browser
-    librewolf
+    qutebrowser
     ## Office
-    libreoffice
+    # libreoffice
     ## PDF
     zathura
     ## chatting
@@ -157,15 +157,19 @@
     # Other utils
     xorg.xsetroot
     networkmanager
+    ## Sound
     volumeicon
+    pulsemixer
+    pamixer
 
     # Terminal
     alacritty
-    
 
+    # Font
+    nerdfonts
+    
     # Programming languages
     rustup # Rust
-    go_1_19 # golang
   ];
 
 
