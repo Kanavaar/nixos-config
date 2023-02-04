@@ -16,14 +16,17 @@
   # Enable zsh
   # programs.zsh.enable = true; 
 
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
+  # Use systemd-boot, Gpt, Uefi
+  boot.loader.systemd-boot.enable = true;
+
+  # Use the GRUB 2 boot loader. Master Boot Record Bios
+  # boot.loader.grub.enable = true;
+  # boot.loader.grub.version = 2;
   # boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
+  # boot.loader.grub.device = "nodev"; # or "nodev" for efi only
 
   networking.hostName = "binary"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -39,6 +42,12 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_TIME = "de_DE.UTF-8";
+    LC_NUMERIC = "de_DE.UTF-8";
+    LC_MONETARY = "de_DE.UTF-8";
+  };
+
   console = {
     font = "Lat2-Terminus16";
   #  keyMap = "de";
@@ -47,6 +56,9 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+
+  # Nvidia Driver
+  services.xserver.videoDrivers = ["nvidia"];
 
 
   # Enable DE/WM and lightdm
@@ -66,7 +78,7 @@
   # };
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
 
   # Enable sound.
   #sound.enable = true;
@@ -78,9 +90,9 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tilman = {
     isNormalUser = true;
-     shell = pkgs.bash;
+    shell = pkgs.bash;
     home = "/home/tilman";
-    extraGroups = [ "wheel" "audio" "video" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "audio" "video" "networkmanager" "usb" "users" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
@@ -107,6 +119,7 @@
     capitaine-cursors
     ## Applications Laucnher
     rofi
+    dmenu
     ## lockscreen
     betterlockscreen
     ## Hotkey setter
@@ -121,25 +134,30 @@
     # vim
     neovim
     ## GUI
-    # emacs
+    emacs
    
     # GUI Applications
     ## Image stuff
     # gimp
     feh
+    nsxiv
     # inkscape
     ## Video Stuff
     mpv
     ## Browser
     qutebrowser
+    brave
     ## Office
     # libreoffice
     ## PDF
     zathura
+    pandoc
+    texlive.combined.scheme-full
     ## chatting
-    discord-canary
+    discord
 
-    # CMD utils I need
+    # Terminal stuff
+    ## CMD I need
     wget
     curl
     git
@@ -150,6 +168,9 @@
     tmux
     htop
     groff
+    ripgrep
+    ## TUi Programms
+    moar
     ## Shells
     zsh
     dash
@@ -161,6 +182,7 @@
     volumeicon
     pulsemixer
     pamixer
+    pavucontrol
 
     # Terminal
     alacritty
@@ -203,7 +225,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
   
   # Auto upgrading
   system.autoUpgrade.enable = true;
