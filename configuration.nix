@@ -17,16 +17,16 @@
   # programs.zsh.enable = true; 
 
   # Use systemd-boot, Gpt, Uefi
-  boot.loader.systemd-boot.enable = true;
+  #boot.loader.systemd-boot.enable = true;
 
   # Use the GRUB 2 boot loader. Master Boot Record Bios
-  # boot.loader.grub.enable = true;
-  # boot.loader.grub.version = 2;
-  # boot.loader.grub.efiSupport = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
-  # boot.loader.grub.device = "nodev"; # or "nodev" for efi only
+  boot.loader.grub.device = "nodev"; # or "nodev" for efi only
 
   networking.hostName = "binary"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -78,7 +78,13 @@
   # };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+  enable = true;
+  drivers = [ pkgs.gutenprint ];
+  };
+
+  # services.printing.enable = true;
+  # services.printing.drivers = [ "gutenprint" ];
 
   # Enable sound.
   #sound.enable = true;
@@ -183,6 +189,13 @@
     pulsemixer
     pamixer
     pavucontrol
+
+    # Music
+    playerctl
+    spotify
+    # ncmpcpp
+    # mopidy
+    # mopidy-mpd
 
     # Terminal
     alacritty
