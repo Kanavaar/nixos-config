@@ -14,6 +14,9 @@
   # Allow Unfree
   nixpkgs.config.allowUnfree = true;
 
+  # Use nix-command
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Enable zsh
   # programs.zsh.enable = true; 
 
@@ -186,8 +189,13 @@
     fzf
     tmux
     htop
+    btop
     groff
     ripgrep
+    killall
+    busybox
+    exa
+    bat
     ## TUi Programms
     moar
     ## Shells
@@ -196,6 +204,8 @@
     
     # Other utils
     xorg.xsetroot
+    xsel
+    xclip
     networkmanager
     ## Sound
     volumeicon
@@ -212,12 +222,28 @@
 
     # Terminal
     alacritty
-
-    # Font
-    nerdfonts
     
     # Programming languages
     rustup # Rust
+    gcc
+    gnumake
+    gnupatch
+  ];
+
+  # Neovim
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+  };
+
+  # Font
+  fonts.fonts = with pkgs; [
+    nerdfonts
+    corefonts
+    winePackages.fonts
+    vistafonts
   ];
 
 
@@ -233,6 +259,7 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+  programs.ssh.askPassword = "";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
