@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
     ];
 
+
   # Allow Unfree
   nixpkgs.config.allowUnfree = true;
 
@@ -17,16 +18,26 @@
   # programs.zsh.enable = true; 
 
   # Use systemd-boot, Gpt, Uefi
-  #boot.loader.systemd-boot.enable = true;
+  # boot.loader.systemd-boot.enable = true;
 
-  # Use the GRUB 2 boot loader. Master Boot Record Bios
+  # Use grub Efi
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.devices = [ "nodev" ];
   # boot.loader.grub.efiInstallAsRemovable = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.useOSProber = true;
+
+  # Use the GRUB 2 boot loader. Master Boot Record Bios
+  # boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.grub.enable = true;
+  # boot.loader.grub.version = 2;
+  # boot.loader.grub.efiSupport = true;
+  # boot.loader.grub.efiInstallAsRemovable = true;
+  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "nodev"; # or "nodev" for efi only
+  # boot.loader.grub.device = "nodev"; # or "nodev" for efi only
 
   networking.hostName = "binary"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -134,6 +145,8 @@
     dunst
     ## Screenshot
     scrot
+    ## Compositor
+    picom
     
     # Text Editor
     ## Terminal
@@ -242,6 +255,6 @@
   
   # Auto upgrading
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade.allowReboot = false;
 }
 
