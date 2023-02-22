@@ -16,8 +16,7 @@
 
   # Use nix-command
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-
+  
   # Shells
   environment.shells = with pkgs; [ zsh dash bash ];
 
@@ -95,8 +94,16 @@
 
 
   # Enable DE/WM and lightdm
-  services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.displayManager.lightdm.enable = true;
   services.xserver.windowManager.awesome.enable = true;
+
+  # Wayland
+  hardware.nvidia.modesetting.enable = true;
+  programs.xwayland.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
+  hardware.opengl.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
   
 
   # Configure keymap in X11
@@ -121,6 +128,7 @@
 
   # Enable sound.
   sound.enable = false;
+  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -148,6 +156,7 @@
   environment.systemPackages = with pkgs; [
     
     # DE/WM
+    ## Login
     ## XFCE stuff
     xfce.thunar
     xfce.thunar-volman
@@ -160,6 +169,8 @@
     lxappearance
     qogir-theme
     qogir-icon-theme
+    numix-icon-theme-circle
+    numix-gtk-theme
     capitaine-cursors
     ## Applications Laucnher
     rofi
@@ -174,6 +185,11 @@
     scrot
     ## Compositor
     picom
+
+    # Games
+    steam
+    protonup
+    lutris
     
     # Text Editor
     ## Terminal
@@ -246,12 +262,26 @@
 
     # Terminal
     alacritty
+    wezterm
     
     # Programming languages
     rustup # Rust
     gcc
     gnumake
     gnupatch
+
+    # Gnome
+    # gnome
+    gnomeExtensions.pop-shell
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.dash-to-panel
+    gnomeExtensions.caffeine
+    gnome.cheese
+    gnome.geary
+    gnome.gnome-characters
+    gnome.tali
+    gnome.gnome-chess
+    gnome.gnome-tweaks
   ];
 
   # Neovim
