@@ -247,6 +247,7 @@
 
     # Terminal
     alacritty
+    wezterm
     
     # Programming languages
     rustup # Rust
