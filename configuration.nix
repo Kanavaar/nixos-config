@@ -218,6 +218,7 @@
     busybox
     exa
     bat
+    stow
     ## TUi Programms
     moar
     ## Shells
