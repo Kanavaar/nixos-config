@@ -7,5 +7,9 @@
 dconf write '/org/gnome/shell/extensions/pop-shell/gap-inner' 2
 dconf write '/org/gnome/shell/extensions/pop-shell/gap-outer' 2
 
+dconf write '/org/gnome/shell/extensions/pop-shell/active-hint' "true"
+# Hex a3be8c
+dconf write '/org/gnome/shell/extensions/pop-shell/hint-color-rgba' "'#a3be8c'"
+
 dconf write '/org/gnome/shell/extensions/pop-shell/toggle-floating' "['<Super>Space']"
 dconf write '/org/gnome/shell/extensions/pop-shell/tile-enter' "['<Super>u']"
