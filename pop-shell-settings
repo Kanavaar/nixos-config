@@ -1,4 +1,8 @@
 #!/bin/sh
+#
+# links
+# https://community.frame.work/t/ubuntu-popos-shell-how-do-you-configure-the-keyboard-shortcuts-to-try-to-mimic-my-i3wm-config/6223
+# https://github.com/NullVoxPopuli/dotfiles/blob/main/configs.sh
 
 dconf write '/org/gnome/shell/extensions/pop-shell/gap-inner' 2
 dconf write '/org/gnome/shell/extensions/pop-shell/gap-outer' 2
