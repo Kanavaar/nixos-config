@@ -32,6 +32,7 @@
       cat = "bat";
       grep = "rg";
       ":q" = "exit";
+      "lock" = "betterlockscreen -l blur && exit";
     };
   };
 
@@ -110,7 +111,7 @@
   services.xserver = {
 	layout = "de";
 	xkbVariant = "nodeadkeys";
-	xkbOptions = "caps:escape";
+	xkbOptions = "caps:ctrl";
   };
   # services.xserver.xkbOptions = {
   #   "eurosign:e";
@@ -154,9 +155,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+
+    # Home manager
+    home-manager
     
     # DE/WM
     ## Login
+    lightdm
     ## XFCE stuff
     xfce.thunar
     xfce.thunar-volman
@@ -169,8 +174,8 @@
     lxappearance
     qogir-theme
     qogir-icon-theme
-    numix-icon-theme-circle
-    numix-gtk-theme
+    arc-theme
+    tela-icon-theme
     capitaine-cursors
     ## Applications Laucnher
     rofi
@@ -186,23 +191,20 @@
     ## Compositor
     picom
 
-    # Games
-    steam
-    protonup
-    lutris
-    
     # Text Editor
     ## Terminal
     # vim
     neovim
     ## GUI
-    emacs
+    lapce
    
     # GUI Applications
     ## Image stuff
     # gimp
-    feh
+    #feh
     nsxiv
+    variety
+    feh
     # inkscape
     ## Video Stuff
     mpv
@@ -215,8 +217,12 @@
     zathura
     pandoc
     texlive.combined.scheme-full
+    quarto
+    rPackages.tinytex
     ## chatting
     discord
+    # Mail
+    evolution
 
     # Terminal stuff
     ## CMD I need
@@ -242,9 +248,9 @@
     
     # Other utils
     xorg.xsetroot
+    xorg.xkill
     xsel
     xclip
-    wl-clipboard
     networkmanager
     caffeine-ng
     ## Sound
@@ -256,6 +262,7 @@
     # Music
     playerctl
     spotify
+    musescore
     # ncmpcpp
     # mopidy
     # mopidy-mpd
@@ -265,24 +272,34 @@
     wezterm
     
     # Programming languages
-    rustup # Rust
+    rustup
     gcc
     gnumake
     gnupatch
 
     # Gnome
-    # gnome
     gnomeExtensions.pop-shell
     gnomeExtensions.blur-my-shell
     gnomeExtensions.dash-to-panel
     gnomeExtensions.caffeine
     gnome.cheese
-    gnome.geary
     gnome.gnome-characters
-    gnome.tali
     gnome.gnome-chess
+    gnuchess
     gnome.gnome-tweaks
   ];
+
+  environment.localBinInPath = true;
+
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+        "application/pdf" = "zathura.dekstop";
+        "img/png" = [
+            "nsxiv.desktop"
+          ];
+      };
+  };
 
   # Neovim
   programs.neovim = {
@@ -292,12 +309,20 @@
     vimAlias = true;
   };
 
+  services.emacs = {
+      install = true;
+      package = pkgs.emacs-gtk;
+      enable = true;
+    };
+
   # Font
   fonts.fonts = with pkgs; [
     nerdfonts
     corefonts
     winePackages.fonts
     vistafonts
+    emacs-all-the-icons-fonts
+    etBook
   ];
 
 
