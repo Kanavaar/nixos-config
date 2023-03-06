@@ -61,6 +61,8 @@
   # Define on which hard drive you want to install Grub.
   # boot.loader.grub.device = "nodev"; # or "nodev" for efi only
 
+  boot.kernelModules = [ "kvm-intel kvm-amd" ];
+
   networking.hostName = "binary"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -142,12 +144,15 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tilman = {
     isNormalUser = true;
     shell = pkgs.zsh;
     home = "/home/tilman";
-    extraGroups = [ "wheel" "audio" "video" "networkmanager" "usb" "users" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "audio" "video" "networkmanager" "usb" "users" "libvirtd" "qemu-libvirtd" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
@@ -158,6 +163,12 @@
 
     # Home manager
     home-manager
+
+    # virtualisation
+    virt-manager
+
+    # Printing
+    system-config-printer
     
     # DE/WM
     ## Login
