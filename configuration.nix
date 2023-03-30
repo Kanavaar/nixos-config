@@ -25,7 +25,7 @@
   programs.zsh = {
     enable = true;
     shellAliases = {
-      ls = "exa -la --group-directories-first";
+      ls = "exa -lha --group-directories-first";
       gca = "git add . && git commit";
       gp = "git push";
       gcl = "git clone";
@@ -40,16 +40,16 @@
   programs.starship.enable = true;
 
   # Use systemd-boot, Gpt, Uefi
-  # boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = true;
 
   # Use grub Efi
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.devices = [ "nodev" ];
+  # boot.loader.grub.enable = true;
+  # boot.loader.grub.devices = [ "nodev" ];
   # boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
+  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # boot.loader.grub.efiSupport = true;
+  # boot.loader.grub.useOSProber = true;
 
   # Use the GRUB 2 boot loader. Master Boot Record Bios
   # boot.loader.efi.canTouchEfiVariables = true;
@@ -95,15 +95,17 @@
 
 
   # Enable DE/WM and lightdm
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.theme = "${(pkgs.fetchFromGitHub {
-      owner = "MarianArlt";
-      repo = "sddm-sugar-dark";
-      rev = "v1.2";
-      sha256 = "0gx0am7vq1ywaw2rm1p015x90b75ccqxnb1sz3wy8yjl27v82yhb";
-    })}";
+  services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.displayManager.sddm.theme = "${(pkgs.fetchFromGitHub {
+  #     owner = "MarianArlt";
+  #     repo = "sddm-sugar-dark";
+  #     rev = "v1.2";
+  #     sha256 = "0gx0am7vq1ywaw2rm1p015x90b75ccqxnb1sz3wy8yjl27v82yhb";
+  #   })}";
   services.xserver.windowManager.awesome.enable = true;
-  
+  services.xserver.windowManager.bspwm = {
+    enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver = {
@@ -119,11 +121,8 @@
   # Enable CUPS to print documents.
   services.printing = {
   enable = true;
-  drivers = [ pkgs.gutenprint ];
+  drivers = [ pkgs.epson-escpr pkgs.gutenprint ];
   };
-
-  # services.printing.enable = true;
-  # services.printing.drivers = [ "gutenprint" ];
 
   # Enable sound.
   sound.enable = false;
@@ -152,16 +151,19 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # Printing
+    system-config-printer
+
+    # Mail
+    evolution
     
     # DE/WM
     ## XFCE stuff
     xfce.thunar
     xfce.thunar-volman
     ## WM's
-    awesome
-    # bspwm
     ## Bar
-    # polybar
+    polybar
     ## Icons, themes and gtk setter 
     lxappearance
     qogir-theme
@@ -186,13 +188,13 @@
     # vim
     neovim
     ## GUI
-    emacs
+    emacs-gtk
    
     # GUI Applications
     ## Image stuff
     # gimp
     feh
-    nsxiv
+    imv
     # inkscape
     ## Video Stuff
     mpv
@@ -227,6 +229,7 @@
     stow
     ## TUi Programms
     moar
+    lf
     ## Shells
     zsh
     dash
@@ -260,6 +263,13 @@
     gcc
     gnumake
     gnupatch
+
+    # Emacs till home-manager
+    emacsPackages.vterm
+
+    # Nix-direnv
+    direnv
+    nix-direnv
   ];
 
   # Neovim
@@ -270,12 +280,20 @@
     vimAlias = true;
   };
 
+  services.lorri = {
+    enable = true;
+    package = pkgs.lorri;
+  };
+
   # Font
   fonts.fonts = with pkgs; [
     nerdfonts
     corefonts
     winePackages.fonts
     vistafonts
+    emacs-all-the-icons-fonts
+    overpass
+    lato
   ];
 
 
