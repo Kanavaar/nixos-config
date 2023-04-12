@@ -95,7 +95,12 @@
 
 
   # Enable DE/WM and lightdm
-  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.lightdm = {
+    enable = true;
+    greeters.gtk = {
+      enable = true;
+    };
+  };
   # services.xserver.displayManager.sddm.theme = "${(pkgs.fetchFromGitHub {
   #     owner = "MarianArlt";
   #     repo = "sddm-sugar-dark";
@@ -124,6 +129,11 @@
   drivers = [ pkgs.epson-escpr pkgs.gutenprint ];
   };
 
+# enable virtualisation
+  virtualisation.libvirtd.enable = true;
+  boot.extraModprobeConfig = "options kvm_intel";
+  boot.kernelModules = [ "kvm-intel" "kvm-amd" ];
+
   # Enable sound.
   sound.enable = false;
   services.pipewire = {
@@ -143,7 +153,7 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     home = "/home/tilman";
-    extraGroups = [ "wheel" "audio" "video" "networkmanager" "usb" "users" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "libvirtd" "wheel" "audio" "video" "networkmanager" "usb" "users" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
@@ -156,6 +166,9 @@
 
     # Mail
     evolution
+
+    # virtualisation
+    virt-manager
     
     # DE/WM
     ## XFCE stuff
@@ -166,8 +179,9 @@
     polybar
     ## Icons, themes and gtk setter 
     lxappearance
-    qogir-theme
-    qogir-icon-theme
+    orchis-theme
+    graphite-gtk-theme
+    tela-circle-icon-theme
     capitaine-cursors
     ## Applications Laucnher
     rofi
@@ -201,6 +215,7 @@
     ## Browser
     qutebrowser
     brave
+    librewolf
     ## Office
     # libreoffice
     ## PDF
@@ -227,6 +242,7 @@
     exa
     bat
     stow
+    aria
     ## TUi Programms
     moar
     lf
@@ -263,6 +279,11 @@
     gcc
     gnumake
     gnupatch
+    
+    # LSP Server
+    rust-analyzer
+    gopls
+    zls
 
     # Emacs till home-manager
     emacsPackages.vterm
@@ -284,6 +305,9 @@
     enable = true;
     package = pkgs.lorri;
   };
+
+  services.gnome.gnome-keyring.enable = true;
+  services.gvfs.enable = true;
 
   # Font
   fonts.fonts = with pkgs; [
