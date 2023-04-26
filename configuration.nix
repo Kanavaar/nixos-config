@@ -135,6 +135,7 @@
   boot.kernelModules = [ "kvm-intel" "kvm-amd" ];
 
   # Enable sound.
+  security.rtkit.enable = true;
   sound.enable = false;
   services.pipewire = {
     enable = true;
