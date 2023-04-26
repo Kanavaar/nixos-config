@@ -153,6 +153,7 @@
   users.users.tilman = {
     isNormalUser = true;
     shell = pkgs.zsh;
+    description = "Tilman Andre Mix";
     home = "/home/tilman";
     extraGroups = [ "libvirtd" "wheel" "audio" "video" "networkmanager" "usb" "users" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
