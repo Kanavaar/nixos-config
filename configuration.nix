@@ -177,15 +177,23 @@
     ## WM's
     ## Bar
     polybar
+    # waybar # wayland
     ## Icons, themes and gtk setter 
     lxappearance
     orchis-theme
     graphite-gtk-theme
     tela-circle-icon-theme
     capitaine-cursors
+    # Themes to test, don't commit
+    materia-theme
+    paper-icon-theme
+    vimix-icon-theme
+    vimix-gtk-themes
+    papirus-icon-theme
     ## Applications Laucnher
     rofi
     dmenu
+    # fuzzel # wayland
     ## lockscreen
     betterlockscreen
     ## Hotkey setter
@@ -207,7 +215,8 @@
     # GUI Applications
     ## Image stuff
     # gimp
-    feh
+    feh # wallpaper
+    # swww # wayland wallpaper
     imv
     # inkscape
     ## Video Stuff
@@ -257,6 +266,11 @@
     wl-clipboard
     networkmanager
     caffeine-ng
+    # wlogout # wayland
+    # seatd # needed for hyprland
+    ## Rss
+    ratt
+    photon-rss
     ## Sound
     volumeicon
     pulsemixer
@@ -271,8 +285,9 @@
     # mopidy-mpd
 
     # Terminal
-    alacritty
+    # alacritty
     wezterm
+    # foot # wayland
     
     # Programming languages
     rustup # Rust
@@ -291,6 +306,11 @@
     # Nix-direnv
     direnv
     nix-direnv
+
+    # Wayland
+    # hyprland-protocols
+    # hyprland-share-picker
+    # xdg-desktop-portal-hyprland
   ];
 
   # Neovim
