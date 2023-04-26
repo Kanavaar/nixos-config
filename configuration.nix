@@ -249,6 +249,7 @@
     btop
     groff
     ripgrep
+    fd
     busybox
     exa
     bat
