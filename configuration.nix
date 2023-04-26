@@ -302,6 +302,7 @@
     rust-analyzer
     gopls
     zls
+    nil
 
     # Emacs till home-manager
     emacsPackages.vterm
