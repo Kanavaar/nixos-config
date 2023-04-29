@@ -255,6 +255,7 @@
     bat
     stow
     aria
+    nmap
     ## TUi Programms
     moar
     lf
