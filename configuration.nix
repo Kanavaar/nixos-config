@@ -12,10 +12,18 @@
 
 
   # Allow Unfree
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+  };
 
   # Use nix-command
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix = {
+    settings.experimental-features = [ "nix-command" "flakes" ];
+    gc = {
+      automatic = true;
+      options = "--max-freed 1G --delete-older-than 7d";
+    };
+  };
 
 
   # Shells
@@ -40,10 +48,20 @@
   programs.starship.enable = true;
 
   # Use systemd-boot, Gpt, Uefi
-  boot.loader.systemd-boot.enable = true;
+  boot = {
+    loader = {
+      systemde-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      timeout = 3;
+    };
+    blackListedKernelModules = ["nouveau"];
+    upportedFilesystems = [ "ntfs" ];
+  };
+
+  # boot.loader.systemd-boot.enable = true;
 
   # Use grub Efi
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
   # boot.loader.grub.enable = true;
   # boot.loader.grub.devices = [ "nodev" ];
   # boot.loader.grub.efiInstallAsRemovable = true;
@@ -93,6 +111,12 @@
   # Nvidia Driver
   services.xserver.videoDrivers = ["nvidia"];
 
+  # Xdg desktop integration
+  xdg = {
+    portal = {
+      enable = true;
+    };
+  };
 
   # Enable DE/WM and lightdm
   services.xserver.displayManager.lightdm = {
@@ -125,8 +149,8 @@
 
   # Enable CUPS to print documents.
   services.printing = {
-  enable = true;
-  drivers = [ pkgs.epson-escpr pkgs.gutenprint ];
+    enable = true;
+    drivers = [ pkgs.epson-escpr pkgs.gutenprint ];
   };
 
 # enable virtualisation
@@ -335,15 +359,19 @@
   services.gvfs.enable = true;
 
   # Font
-  fonts.fonts = with pkgs; [
-    nerdfonts
-    corefonts
-    winePackages.fonts
-    vistafonts
-    emacs-all-the-icons-fonts
-    overpass
-    lato
-  ];
+  fonts = {
+    fontDir.enable = true;
+    enableDefaultFonts = true;
+    fonts = with pkgs; [
+      nerdfonts
+      corefonts
+      winePackages.fonts
+      vistafonts
+      emacs-all-the-icons-fonts
+      overpass
+      lato
+    ];
+  };
 
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -364,12 +392,12 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
+  system.copySystemConfiguration = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -380,7 +408,7 @@
   system.stateVersion = "23.05"; # Did you read the comment?
   
   # Auto upgrading
-  system.autoUpgrade.enable = true;
+  system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = false;
 }
 
