@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -45,17 +45,67 @@
   };
 
   # Starship
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = true;
+      format = lib.concatStrings [
+        "$username"
+        "$hostname"
+        "$directory"
+        "$git_branch"
+        "$git_state"
+        "$git_status"
+        "$cmd_duration"
+        "$line_break"
+        "$character"
+      ];
+      directory = {
+        style = "blue";
+        truncation_length = 100;
+        truncate_to_repo = false;
+        format = "[$path]($style)[$read_only]($read_only_style) ";
+      };
+      character = {
+        success_symbol = "[❯](green)";
+        error_symbol = "[❯](red)";
+        vimcmd_symbol = "[❮](purple)";
+      };
+      git_branch = {
+        format = "[$branch]($style)";
+        style = "bright-black";
+      };
+      git_status = {
+        format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)";
+        style = "cyan";
+        conflicted = "​";
+        untracked = "​";
+        modified = "​";
+        staged = "​";
+        renamed = "​";
+        deleted = "​";
+        stashed = "≡";
+      };
+      git_state = {
+        format = "\\([$state( $progress_current/$progress_total)]($style)\\) ";
+        style = "bright-black";
+      };
+      cmd_duration = {
+        format = " [$duration]($style) ";
+        style = "yellow";
+      };
+    };
+  };
 
   # Use systemd-boot, Gpt, Uefi
   boot = {
     loader = {
-      systemde-boot.enable = true;
+      systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
       timeout = 3;
     };
-    blackListedKernelModules = ["nouveau"];
-    upportedFilesystems = [ "ntfs" ];
+    blacklistedKernelModules = ["nouveau"];
+    supportedFilesystems = [ "ntfs" ];
   };
 
   # boot.loader.systemd-boot.enable = true;
