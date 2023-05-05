@@ -40,6 +40,7 @@
       gcm = "git commit";
       cat = "bat";
       grep = "rg";
+      df = "df -h";
       ":q" = "exit";
     };
   };
