@@ -189,9 +189,9 @@
 
   # Configure keymap in X11
   services.xserver = {
-	layout = "de";
-	xkbVariant = "nodeadkeys";
-	xkbOptions = "caps:escape";
+    layout = "de";
+    xkbVariant = "nodeadkeys";
+    xkbOptions = "caps:escape";
   };
   # services.xserver.xkbOptions = {
   #   "eurosign:e";
