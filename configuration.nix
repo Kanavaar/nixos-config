@@ -318,6 +318,7 @@
     git
     zip
     unzip
+    gnutar
     file
     fzf
     tmux
