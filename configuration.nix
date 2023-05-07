@@ -43,6 +43,14 @@
       df = "df -h";
       ":q" = "exit";
     };
+    autosuggestions = {
+      enable = true;
+    };
+    enableCompletion = true;
+    enableBashCompletion = true;
+    syntaxHighlighting = {
+      enable = true;
+    };
   };
 
   # Starship
