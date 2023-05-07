@@ -335,8 +335,12 @@
     ripgrep
     fd
     busybox
-    exa
-    bat
+    exa # ls
+    bat # cat
+    lfs # df replacement
+    du-dust # du
+    zoxide # cd
+    hyperfine # time
     stow
     aria
     nmap
