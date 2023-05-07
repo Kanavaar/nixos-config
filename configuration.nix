@@ -474,5 +474,9 @@
   # Auto upgrading
   system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = false;
+
+  systemd = {
+    extraConfig = "DefaultTimeoutStopSec=20s";
+  };
 }
 
