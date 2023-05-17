@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -76,8 +77,8 @@
         format = "[$path]($style)[$read_only]($read_only_style) ";
       };
       character = {
-        success_symbol = "[❯](green)";
-        error_symbol = "[❯](red)";
+        success_symbol = "[󰘧](green)";
+        error_symbol = "[󰘧](red)";
         vimcmd_symbol = "[❮](purple)";
       };
       git_branch = {
@@ -113,7 +114,7 @@
       efi.canTouchEfiVariables = true;
       timeout = 3;
     };
-    blacklistedKernelModules = ["nouveau"];
+    blacklistedKernelModules = [ "nouveau" ];
     supportedFilesystems = [ "ntfs" ];
   };
 
@@ -141,7 +142,7 @@
   networking.hostName = "binary"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -160,7 +161,7 @@
 
   console = {
     font = "Lat2-Terminus16";
-  #  keyMap = "de";
+    #  keyMap = "de";
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
@@ -168,7 +169,7 @@
   services.xserver.enable = true;
 
   # Nvidia Driver
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Xdg desktop integration
   xdg = {
@@ -212,7 +213,7 @@
     drivers = [ pkgs.epson-escpr pkgs.gutenprint ];
   };
 
-# enable virtualisation
+  # enable virtualisation
   virtualisation.libvirtd.enable = true;
   boot.extraModprobeConfig = "options kvm_intel";
   boot.kernelModules = [ "kvm-intel" "kvm-amd" ];
@@ -228,7 +229,7 @@
       support32Bit = true;
     };
   };
- 
+
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
@@ -254,7 +255,7 @@
 
     # virtualisation
     virt-manager
-    
+
     # DE/WM
     ## XFCE stuff
     xfce.thunar
@@ -289,14 +290,14 @@
     scrot
     ## Compositor
     picom
-    
+
     # Text Editor
     ## Terminal
     # vim
     neovim
     ## GUI
     emacs-gtk
-   
+
     # GUI Applications
     ## Image stuff
     # gimp
@@ -350,7 +351,7 @@
     ## Shells
     zsh
     dash
-    
+
     # Other utils
     xorg.xsetroot
     xsel
@@ -380,13 +381,13 @@
     # alacritty
     wezterm
     # foot # wayland
-    
+
     # Programming languages
     rustup # Rust
     gcc
     gnumake
     gnupatch
-    
+
     # LSP Server
     rust-analyzer
     gopls
@@ -470,7 +471,7 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-  
+
   # Auto upgrading
   system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = false;
