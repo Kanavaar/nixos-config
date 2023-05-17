@@ -1,0 +1,5 @@
+@default:
+  just --list
+
+run:
+  nix run '.#nixosConfigurations.default.config.system.build.vm'
