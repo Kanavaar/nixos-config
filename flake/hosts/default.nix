@@ -146,6 +146,7 @@
     ## Terminal
     # vim
     neovim
+    helix
     ## GUI
     # emacs-gtk
     emacsUnstable
@@ -367,6 +368,7 @@
     enableDefaultFonts = true;
     fonts = with pkgs; [
       nerdfonts
+      julia-mono
       corefonts
       winePackages.fonts
       vistafonts
