@@ -98,82 +98,33 @@
 
   # Packages
   environment.systemPackages = with pkgs; [
-    # Printing
-    system-config-printer
-
-    # Mail
-    evolution
-
-    # virtualisation
-    virt-manager
-
     # DE/WM
     ## XFCE stuff
     xfce.thunar
     xfce.thunar-volman
-    ## WM's
-    ## Bar
-    polybar
-    # waybar # wayland
-    ## Icons, themes and gtk setter 
-    lxappearance
-    orchis-theme
-    graphite-gtk-theme
-    tela-circle-icon-theme
-    capitaine-cursors
-    # Themes to test, don't commit
-    materia-theme
-    paper-icon-theme
-    vimix-icon-theme
-    vimix-gtk-themes
-    papirus-icon-theme
-    ## Applications Laucnher
-    rofi
     dmenu
     # fuzzel # wayland
     ## lockscreen
-    betterlockscreen
-    ## Hotkey setter
-    sxhkd
-    ## Notification
-    dunst
-    ## Screenshot
-    scrot
-    ## Compositor
-    picom
-
     # Text Editor
     ## Terminal
     # vim
     neovim
     ## GUI
     # emacs-gtk
-    emacsUnstable
 
     # GUI Applications
     ## Image stuff
     # gimp
     feh # wallpaper
     # swww # wayland wallpaper
-    imv
     # inkscape
     ## Video Stuff
     mpv
     ## Browser
     qutebrowser
-    brave
-    librewolf
     ## Office
     # libreoffice
     ## PDF
-    zathura
-    sioyek
-    typst
-    pandoc
-    texlive.combined.scheme-full
-    ## chatting
-    discord
-
     # Terminal stuff
     ## CMD I need
     wget
@@ -209,14 +160,9 @@
     xorg.xsetroot
     xsel
     xclip
-    wl-clipboard
-    networkmanager
-    caffeine-ng
     # wlogout # wayland
     # seatd # needed for hyprland
     ## Rss
-    ratt
-    photon-rss
     ## Sound
     volumeicon
     pulsemixer
@@ -225,7 +171,6 @@
 
     # Music
     playerctl
-    spotify
     # ncmpcpp
     # mopidy
     # mopidy-mpd
@@ -249,12 +194,6 @@
 
     # LSP Server
     rust-analyzer
-    gopls
-    zls
-    nil
-
-    # Emacs till home-manager
-    emacsPackages.vterm
 
     # Nix-direnv
     direnv
@@ -290,7 +229,6 @@
       };
       windowManager = {
         awesome.enable = true;
-        bspwm.enable = true;
       };
       # Keyboard
       layout = "de";

@@ -1,5 +1,22 @@
-@default:
+@_default:
   just --list
 
 run:
   nix run '.#nixosConfigurations.default.config.system.build.vm'
+
+setup:
+  mkdir ~/.config/nix
+  echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+
+disks disk: 
+  sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode zap_create_mount ./hardware/disks.nix --arg disks '[ "/dev/{{disk}}" ]'
+  sudo nixos-generate-config --no-filesystems --root /mnt
+  cp /mnt/etc/nixos/hardware-configuration.nix ./hardware/default.nix
+
+install:
+  git add .
+  sudo nixos-install --flake .#default
+
+full disk: setup
+  just disks {{disk}}
+  just install

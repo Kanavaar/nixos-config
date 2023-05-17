@@ -1,8 +1,8 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    disko = {
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay = {
@@ -14,7 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, fenix, home-manager, emacs-overlay }: {
+  outputs = { self, nixpkgs, fenix, disko, emacs-overlay }: {
     nixosConfigurations = {
       default = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -23,6 +23,11 @@
           { nixpkgs.overlays = [ fenix.overlays.default emacs-overlay.overlays.default ]; }
           ./hosts
           ./hosts/tilman.nix
+          ./hardware
+          disko.nixosModules.disko
+          (import ./hardware/disks.nix {
+            disks = ["/dev/vda"];
+          })
           #    home-manager.nixosModule.home-manager {
           #      home-manager.useGlobalPkgs = true;
           #      home-manager.useUserPackages = true;
